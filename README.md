@@ -1,6 +1,14 @@
 # mov-cutter
 
-MP4動画を**再エンコードせずに**（`ffmpeg -c copy`によるストリームコピー）指定した範囲で切り出すツール。
+MP4動画を指定した範囲で切り出すツール。
+
+再エンコードはしない（`ffmpeg -c copy`によるストリームコピー）。
+
+CLIによる利用以外に、Web UIによる開始・終了点指定のサポート。
+
+![web ui screen shot](web_ui_ss.jpg)
+
+## ファイル説明
 
 - `mov_cutter.py` : CLI。開始/終了時刻を文字列で指定して切り出す
 - `mov_cutter_ui.py` : ブラウザUI。動画を再生しながら開始/終了位置をボタンで指定して切り出す（内部で`mov_cutter.py`のロジックを再利用）
