@@ -12,6 +12,7 @@ CLIによる利用以外に、Web UIによる開始・終了点指定のサポ�
 
 - `mov_cutter.py` : CLI。開始/終了時刻を文字列で指定して切り出す
 - `mov_cutter_ui.py` : ブラウザUI。動画を再生しながら開始/終了位置をボタンで指定して切り出す（内部で`mov_cutter.py`のロジックを再利用）
+- `mov_concat.py` : CLI。複数のMP4を再エンコードなしで順番に連結する
 
 詳細な仕様は [spec.md](spec.md) を参照。
 
@@ -56,6 +57,30 @@ python3 mov_cutter.py -i input.mp4 -e 4:59
 ```
 
 `-c copy`を使うため、開始位置は指定時刻の直前のキーフレームにスナップされます（数秒ずれることがあります）。
+
+## CLI: mov_concat.py
+
+複数のMP4を再エンコードなし（ストリームコピー）で指定順に連結します。
+
+```bash
+python3 mov_concat.py [-o OUTPUT] INPUT1 INPUT2 [INPUT3 ...]
+```
+
+| オプション | 必須 | 説明 |
+|---|---|---|
+| `INPUT...` | ○ | 入力MP4ファイルパス（2つ以上、指定順に連結） |
+| `-o`, `--output` | - | 出力ファイルパス。省略時は `{先頭ファイル名}-concat.mp4` |
+
+### 使用例
+
+```bash
+python3 mov_concat.py -o concat.mp4 1.mp4 2.mp4 3.mp4
+
+# 出力ファイル名を省略 -> 1-concat.mp4
+python3 mov_concat.py 1.mp4 2.mp4 3.mp4
+```
+
+`-c copy`を使うため、全入力ファイルのコーデック・解像度・フレームレート等のパラメータが一致している必要があります（不一致の場合は出力が壊れることがあります）。
 
 ## GUI: mov_cutter_ui.py
 
