@@ -1,0 +1,16 @@
+[tools]
+python = "3"
+uv = "latest"
+
+[tasks.cut]
+description = "mov_cutter.py (CLI切り出し)"
+run = "uv run mov_cutter.py"
+
+[tasks.ui]
+alias = "start"
+description = "mov_cutter_ui.py (Web UI)"
+run = "uv run mov_cutter_ui.py"
+
+[tasks.concat]
+description = "mov_concat.py (連結)"
+run = "uv run mov_concat.py"

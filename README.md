@@ -25,6 +25,19 @@ CLIによる利用以外に、Web UIによる開始・終了点指定のサポ�
 brew install ffmpeg  # macOSの場合
 ```
 
+### mise + uv で実行する場合
+
+`mise.toml` に Python / uv とタスクを定義しています。
+
+```bash
+mise install
+mise run cut -- -i input.mp4 -s 3:30 -e 4:59
+mise run ui -- -i input.mp4
+mise run concat -- -o concat.mp4 1.mp4 2.mp4
+```
+
+`ffmpeg` は別途インストールしてください。
+
 ## CLI: mov_cutter.py
 
 ```bash
